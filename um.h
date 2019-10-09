@@ -28,7 +28,15 @@ private:
     //                       meaningful, dest next least meaningful after that.
     void CMOV(int dest, int src, int cond);
     
-    //TODO IMPLEMENT 1 AND 2!
+    //#1 - Array Index: dest receives the value stored at offset
+    //                  in offset in the array identified by source. 
+    //TODO REWRITE COMMENT
+    void INDEX(int dest, int offset, int source);
+
+    //#2 - Array Amendment: The array identified by src is amended at the offset
+    //                      in register offset to store the value in register dest. 
+    //TODO REWRITE COMMENT
+    void AMEND(int src, int offset, int dest);
     
     //#3 - Addition: Adds r1 to r2 and stores the value in dest.
     void ADD(int dest, int r1, int r2);
@@ -46,10 +54,38 @@ private:
     //#7 - Halt: stops the machine.
     void HALT();
 
-    //TODO IMPLEMENT 8, 9, 11, 12!!!
+    //#8 - Allocation: A new array is created with a capacity of platters commensurate to the value 
+    //                 in the register C. This new array is initialized entirely with platters
+    //                 holding the value 0. A bit pattern not consisting of exclusively the 0 bit, 
+    //                 and that identifies no other active allocated array, is placed in dest 
+    //TODO REDO COMMENT
+    void ALLOC(int dest, int src);
     
-    //#10 - Output: outputs the value in the register argument (as a char?) Only displays values b/w 0 and 255
+    //#9 - Abandonment: The array identified by the register C is abandoned. Future allocations may 
+    //                  then reuse that identifier. //TODO REDO COMMENT
+    void ABAND(int reg);
+    
+    //#10 - Output: outputs the value in the register argument (as a char?) Only displays values 
+    //              between 0 and 255
     void OUT(int regist);
+    
+    //#11 - Input: The universal machine waits for input on the console. When input arrives, the 
+    //             register src is loaded with the input, which must be between and including 0 and 255.
+    //             If the end of input has been signaled, then the register C is endowed with a 
+    //             uniform value pattern where every place is pregnant with the 1 bit. 
+    //TODO REDO COMMENT
+    void IN(int src);
+    
+    //#12 - Load Program: The array identified by the B register is duplicated and the duplicate 
+    //                    shall replace the '0' array, regardless of size. The execution finger is 
+    //                    placed to indicate the platter of this array that is described by the 
+    //                    offset given in C, where the value 0 denotes the first platter, 1 the 
+    //                    second, et cetera.
+    //
+    //                    The '0' array shall be the most sublime choice for loading, and shall be 
+    //                    handled with the utmost velocity. 
+    //TODO REDO COMMENT
+    void LOAD(int src, int offset);
     
     //#13 - Orthography: Stores an immediate value into a register.
     void ORTH(int regist, uint32_t immed);

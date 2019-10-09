@@ -92,7 +92,17 @@ void Machine::CMOV(int dest, int src, int cond)
     }
 }
 
-//1 and 2 currently unimplemented
+//1
+void Machine::INDEX(int dest, int offset, int source)
+{
+    //TODO UNIMPLEMENTED
+}
+
+//2
+void Machine::AMEND(int arrayAddress, int offset, int dest)
+{
+    //TODO UNIMPLEMENTED
+}
 
 //3
 void Machine::ADD(int dest, int r1, int r2)
@@ -121,11 +131,21 @@ void Machine::NAND(int dest, int r1, int r2)
 //7
 void Machine::HALT()
 {
-    printRegisters(); //debug
+    printRegisters(); //TODO DEBUG REMOVE
     exit(1); //TODO CHANGE THIS?
 }
 
-//8,9 currently unimplemented
+//8
+void ALLOC(int dest, int src)
+{
+    //TODO UNIMPLEMENTED
+}
+
+//9
+void ABAND(int reg);
+{
+    //TODO UNIMPLEMENTED
+}
 
 //10
 void Machine::OUT(int regist)
@@ -133,7 +153,17 @@ void Machine::OUT(int regist)
     cout << (char)registers[regist];
 }
 
-//11, 12 currently unimplemented
+//11
+void IN(int src)
+{
+    //TODO UNIMPLEMENTED
+}
+
+//12
+void LOAD(int src, int offset)
+{
+    //TODO UNIMPLEMENTED
+}
 
 //13
 void Machine::ORTH(int regist, uint32_t immed)
