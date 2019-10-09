@@ -42,6 +42,10 @@ void Machine::run()
     while (true) //debug change later
     {
         uint32_t instr = zero_array[pc];
+        
+        //increment program counter to next instruction
+        pc++;
+        
         uint32_t opcode = getBits(instr, 28, 15); //instr>>28; //get first 4 bits of instruction to get the operation
         
         if (opcode >= 0 && opcode <= 6) //0 to 6
@@ -74,9 +78,6 @@ void Machine::run()
             ORTH(regist, immed);
         }
         //TODO ELSE DEFAULT?
-        
-        //increment program counter to next instruction
-        pc++;
     }
     
     printRegisters(); //debug
@@ -142,7 +143,7 @@ void ALLOC(int dest, int src)
 }
 
 //9
-void ABAND(int reg);
+void ABAND(int reg)
 {
     //TODO UNIMPLEMENTED
 }
