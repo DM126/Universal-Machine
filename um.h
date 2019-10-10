@@ -30,10 +30,8 @@ private:
     //                       meaningful, dest next least meaningful after that.
     void CMOV(int dest, int src, int cond);
     
-    //#1 - Array Index: dest receives the value stored at offset
-    //                  in offset in the array identified by source. 
-    //TODO REWRITE COMMENT
-    void INDEX(int dest, int offset, int source);
+    //#1 - Array Index: register dest receives the value stored in array src at the specified offset.
+    void INDEX(int dest, int src, int offset);
 
     //#2 - Array Amendment: The array identified by src is amended at the offset
     //                      in register offset to store the value in register dest. 

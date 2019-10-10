@@ -94,9 +94,10 @@ void Machine::CMOV(int dest, int src, int cond)
 }
 
 //1
-void Machine::INDEX(int dest, int offset, int source)
+void Machine::INDEX(int dest, int source, int offset)
 {
-    //TODO UNIMPLEMENTED
+    //TODO TEST
+    registers[dest] = platterArrays[source][offset];
 }
 
 //2
