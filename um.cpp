@@ -25,23 +25,23 @@ Machine::Machine()
 void Machine::run()
 {
     //debug commands
-    zero_array[0] = 0b11010000000000000000000000000111;
-    zero_array[1] = 0b00001111111111111111111001000000;
-    zero_array[2] = 0b00111111111111111111111010000001;
-    zero_array[3] = 0b01001111111111111111111011000001;
-    zero_array[4] = 0b01011111111111111111111100011000;
-    zero_array[5] = 0b01101111111111111111111101001010;
-    zero_array[6] = 0b11011100000000000000000001001011;
-    zero_array[7] = 0b10101111111111111111111111111110;
-    zero_array[8] = 0b11011100000000000000000000001010;
-    zero_array[9] = 0b10101111111111111111111111111110;
-    zero_array[10] = 0b01111111111111111111111111111111; //Halt
+    platterArrays[0][0] = 0b11010000000000000000000000000111;
+    platterArrays[0][1] = 0b00001111111111111111111001000000;
+    platterArrays[0][2] = 0b00111111111111111111111010000001;
+    platterArrays[0][3] = 0b01001111111111111111111011000001;
+    platterArrays[0][4] = 0b01011111111111111111111100011000;
+    platterArrays[0][5] = 0b01101111111111111111111101001010;
+    platterArrays[0][6] = 0b11011100000000000000000001001011;
+    platterArrays[0][7] = 0b10101111111111111111111111111110;
+    platterArrays[0][8] = 0b11011100000000000000000000001010;
+    platterArrays[0][9] = 0b10101111111111111111111111111110;
+    platterArrays[0][10] = 0b01111111111111111111111111111111; //Halt
     
     printRegisters(); //debug
     
     while (true) //debug change later
     {
-        uint32_t instr = zero_array[pc];
+        uint32_t instr = platterArrays[0][pc];
         
         //increment program counter to next instruction
         pc++;
@@ -137,13 +137,13 @@ void Machine::HALT()
 }
 
 //8
-void ALLOC(int dest, int src)
+void Machine::ALLOC(int dest, int src)
 {
     //TODO UNIMPLEMENTED
 }
 
 //9
-void ABAND(int reg)
+void Machine::ABAND(int reg)
 {
     //TODO UNIMPLEMENTED
 }
@@ -155,13 +155,13 @@ void Machine::OUT(int regist)
 }
 
 //11
-void IN(int src)
+void Machine::IN(int src)
 {
     //TODO UNIMPLEMENTED
 }
 
 //12
-void LOAD(int src, int offset)
+void Machine::LOAD(int src, int offset)
 {
     //TODO UNIMPLEMENTED
 }

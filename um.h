@@ -6,6 +6,7 @@
 static const int NUM_REGISTERS = 8; //number of registers
 static const int NUM_INSTRUCTIONS = 14; //number of instructions
 
+//Function pointer for operations
 class Machine;
 typedef void(Machine::*operation)(int r1, int r2, int r3);
 
@@ -108,8 +109,8 @@ private:
     //array of operations (only has 0-6 for now)
     operation operations[NUM_INSTRUCTIONS];
     
-    //Instructions array?
-    uint32_t zero_array[128]; //TODO CHANGE SIZE OF ARRAY!!!
+    //Collection of arrays. [0] is the zero array, the current program?
+    uint32_t* platterArrays[128]; //TODO CHANGE SIZE OF ARRAY
     
     //program counter
     int pc = 0;
