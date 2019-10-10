@@ -145,8 +145,21 @@ void Machine::HALT()
 //8
 void Machine::ALLOC(int dest, int src)
 {
+    //TODO TEST
     int arraySize = registers[src];
-    platterArrays[] = new uint32_t[arraySize];
+    
+    //get the address to use for this array.
+    int arrayAddress;
+    if (availableMemory.empty())
+    {
+        arrayAddress = nextAddress;
+        nextAddress++;
+    }
+    else
+    {
+        arrayAddress = availableMemory.pop();
+    }
+    platterArrays[arrayAddress] = new uint32_t[arraySize];
 }
 
 //9
