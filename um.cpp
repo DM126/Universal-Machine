@@ -108,7 +108,7 @@ void Machine::INDEX(int dest, int source, int offset)
 void Machine::AMEND(int arrayAddress, int offset, int src)
 {
     //TODO TEST
-    platterArrays[arrayAddress][offset] = registers[dest];
+    platterArrays[arrayAddress][offset] = registers[src];
 }
 
 //3
@@ -150,14 +150,15 @@ void Machine::ALLOC(int dest, int src)
     
     //get the address to use for this array.
     int arrayAddress;
-    if (availableMemory.empty())
+    if (freedMemory.empty())
     {
         arrayAddress = nextAddress;
         nextAddress++;
     }
     else
     {
-        arrayAddress = availableMemory.pop();
+        arrayAddress = freedMemory.top();
+        freedMemory.pop();
     }
     platterArrays[arrayAddress] = new uint32_t[arraySize];
 }
@@ -167,7 +168,7 @@ void Machine::ABAND(int reg)
 {
     //TODO TEST
     int arrayAddress = registers[reg];
-    availableMemory.push(arrayAddress);
+    freedMemory.push(arrayAddress);
     delete platterArrays[arrayAddress];
 }
 
