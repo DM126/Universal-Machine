@@ -12,7 +12,8 @@ Machine::Machine()
     }
     
     operations[0] = &Machine::CMOV;
-    //TODO ops 1 and 2!
+    operations[1] = &Machine::INDEX;
+    operations[2] = &Machine::AMEND;
     operations[3] = &Machine::ADD;
     operations[4] = &Machine::MUL;
     operations[5] = &Machine::DIV;
@@ -60,28 +61,60 @@ void Machine::run()
             
             (this->*operations[opcode])(r1, r2, r3);
         }
-        else if (opcode == 7) //7
+        else
         {
-            HALT(); 
-            //TODO Find some way to use generic signature function pointers so all operations can be in the array?
+            //TODO REFACTOR
+            switch (opcode)
+            {
+                //TODO Find some way to use generic signature function pointers so all operations can be in the array?
+                case 7:
+                {
+                    HALT();
+                    break;
+                }
+                case 8:
+                {
+                    //TODO TEST
+                    uint32_t dest = getBits(instr, 3, 7);
+                    uint32_t src = getBits(instr, 0, 7);
+                    ALLOC(dest, src);
+                    break;
+                }
+                case 9:
+                {
+                    uint32_t regist = getBits(instr, 0, 7);
+                    ABAND(regist);
+                    break;
+                }
+                case 10:
+                {
+                    uint32_t regist = getBits(instr, 0, 7);
+                    OUT(regist);
+                    break;
+                }
+                case 11:
+                {
+                    //TODO INPUT
+                    break;
+                }
+                case 12:
+                {
+                    //TODO LOAD
+                    break;
+                }
+                case 13:
+                {
+                    uint32_t regist = getBits(instr, 25, 7); //register to store an immediate value
+                    uint32_t immed = getBits(instr, 0, 67108863); //immediate value to load into register (25 bits)
+                    ORTH(regist, immed);
+                    break;
+                }
+                default:
+                {
+                    throw invalid_argument("Invalid opcode");
+                }
+            }
         }
-        else if (opcode == 10) //10
-        {
-            uint32_t regist = getBits(instr, 0, 7);
-            OUT(regist);
-        }
-        else if (opcode < 13) //8, 9, 11, and 12
-        {
-            //TODO
-        }
-        else if (opcode == 13) //13
-        {
-            uint32_t regist = getBits(instr, 25, 7); //register to store an immediate value
-            uint32_t immed = getBits(instr, 0, 67108863); //immediate value to load into register (25 bits)
-            
-            ORTH(regist, immed);
-        }
-        //TODO ELSE DEFAULT?
     }
     
     printRegisters(); //debug
