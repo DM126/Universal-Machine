@@ -101,9 +101,10 @@ void Machine::INDEX(int dest, int source, int offset)
 }
 
 //2
-void Machine::AMEND(int arrayAddress, int offset, int dest)
+void Machine::AMEND(int arrayAddress, int offset, int src)
 {
-    //TODO UNIMPLEMENTED
+    //TODO TEST
+    platterArrays[arrayAddress][offset] = registers[dest];
 }
 
 //3

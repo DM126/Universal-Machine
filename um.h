@@ -33,10 +33,9 @@ private:
     //#1 - Array Index: register dest receives the value stored in array src at the specified offset.
     void INDEX(int dest, int src, int offset);
 
-    //#2 - Array Amendment: The array identified by src is amended at the offset
-    //                      in register offset to store the value in register dest. 
-    //TODO REWRITE COMMENT
-    void AMEND(int src, int offset, int dest);
+    //#2 - Array Amendment: The value in register src is stored in the array at arrayAddress with the
+    //                      specified offset.
+    void AMEND(int arrayAddress, int offset, int src);
     
     //#3 - Addition: Adds r1 to r2 and stores the value in dest.
     void ADD(int dest, int r1, int r2);
