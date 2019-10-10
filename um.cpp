@@ -151,7 +151,13 @@ void Machine::ABAND(int reg)
 //10
 void Machine::OUT(int regist)
 {
-    cout << (char)registers[regist];
+    uint32_t output = registers[regist];
+    if (output > MAX_OUTPUT)
+    {
+        throw invalid_argument("Char value too large in OUT.");
+    }
+    
+    cout << (char)output;
 }
 
 //11

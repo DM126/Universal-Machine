@@ -5,6 +5,7 @@
 
 static const int NUM_REGISTERS = 8; //number of registers
 static const int NUM_INSTRUCTIONS = 14; //number of instructions
+static const int MAX_OUTPUT = 255; //Max char value that can be output in OUT()
 
 //Function pointer for operations
 class Machine;
