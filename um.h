@@ -2,6 +2,7 @@
 #define UM_H
 
 #include <cstdint>
+#include <stack>
 
 static const int NUM_REGISTERS = 8; //number of registers
 static const int NUM_INSTRUCTIONS = 14; //number of instructions
@@ -111,7 +112,13 @@ private:
     uint32_t* platterArrays[128]; //TODO CHANGE SIZE OF ARRAY
     
     //program counter
-    int pc = 0;
+    int pc = 0; //TODO use uint32_t?
+    
+    //stores addresses of freed arrays to be reused.
+    std::stack<int> freedMemory;
+    
+    //Address that will be allocated for the next array if the freed stack is empty.
+    int nextAddress;
 };
 
 #endif

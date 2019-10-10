@@ -24,6 +24,10 @@ Machine::Machine()
 
 void Machine::run()
 {
+    //TODO Should program start with ALLOC or jsut do this?
+    platterArrays[0] = new uint32_t[128]; //TODO TEMPORARY, ALSO CHANGE ARRAY SIZE
+    nextAddress = 1; //0 is reserved, so 1 is next?
+    
     //debug commands
     platterArrays[0][0] = 0b11010000000000000000000000000111;
     platterArrays[0][1] = 0b00001111111111111111111001000000;
@@ -141,13 +145,17 @@ void Machine::HALT()
 //8
 void Machine::ALLOC(int dest, int src)
 {
-    //TODO UNIMPLEMENTED
+    int arraySize = registers[src];
+    platterArrays[] = new uint32_t[arraySize];
 }
 
 //9
 void Machine::ABAND(int reg)
 {
-    //TODO UNIMPLEMENTED
+    //TODO TEST
+    int arrayAddress = registers[reg];
+    availableMemory.push(arrayAddress);
+    delete platterArrays[arrayAddress];
 }
 
 //10
