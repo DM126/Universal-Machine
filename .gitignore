@@ -1,4 +1,4 @@
 *.um*
 *.out
+*.o
 assembler/
-
