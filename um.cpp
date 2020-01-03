@@ -20,15 +20,81 @@ Machine::Machine()
     operations[6] = &Machine::NAND;
     //ORTH is implemented separately since it uses different bits and has a different signature
     
+    //TODO Should program start with ALLOC or just do this?
+    platterArrays[0] = new uint32_t[ARRAY_SIZE]; //TODO TEMPORARY, ALSO CHANGE ARRAY SIZE
+    nextAddress = 1; //0 is reserved, so 1 is next?
+    
+    
     run();
+}
+
+Machine::~Machine()
+{
+    deleteHelper();
+}
+
+Machine::Machine(const Machine& other)
+{
+    copyHelper(other);
+}
+
+Machine& Machine::operator=(const Machine& rhs)
+{
+    if (this != &rhs)
+    {
+        deleteHelper();
+        copyHelper(rhs);
+    }
+    
+    return *this;
+}
+
+void Machine::copyHelper(const Machine& other)
+{
+    for (int i = 0; i < NUM_REGISTERS; i++)
+    {
+        registers[i] = other.registers[i];
+    }
+    
+    operations[0] = &Machine::CMOV;
+    operations[1] = &Machine::INDEX;
+    operations[2] = &Machine::AMEND;
+    operations[3] = &Machine::ADD;
+    operations[4] = &Machine::MUL;
+    operations[5] = &Machine::DIV;
+    operations[6] = &Machine::NAND;
+    
+    for (int i = 0; i < ARRAY_SIZE; i++)
+    {
+        if (other.platterArrays[i] != nullptr)
+        {
+            platterArrays[i] = new uint32_t[ARRAY_SIZE];
+            for (int j = 0; j < ARRAY_SIZE; j++)
+            {
+                platterArrays[i][j] = other.platterArrays[i][j];
+            }
+        }
+        else
+        {
+            platterArrays[i] = nullptr;
+        }
+    }
+    
+    pc = other.pc;
+    freedMemory = other.freedMemory;
+    nextAddress = other.nextAddress;
+}
+
+void Machine::deleteHelper()
+{
+    for (int i = 0; i < ARRAY_SIZE; i++)
+    {
+        delete[] platterArrays[i];
+    }
 }
 
 void Machine::run()
 {
-    //TODO Should program start with ALLOC or jsut do this?
-    platterArrays[0] = new uint32_t[128]; //TODO TEMPORARY, ALSO CHANGE ARRAY SIZE
-    nextAddress = 1; //0 is reserved, so 1 is next?
-    
     //debug commands
     platterArrays[0][0]  = 0b11010000000000000000000000000111;  //ORTH r0, 7
     platterArrays[0][1]  = 0b00001111111111111111111001000000;  //CMOV r1, r0, r0

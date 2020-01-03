@@ -19,6 +19,11 @@ public:
     //Default constructor that sets up the machine and begins execution.
     Machine();
     
+    //Big three
+    ~Machine();
+    Machine(const Machine& other);
+    Machine& operator=(const Machine& rhs);
+    
 private:
 
     //Member functions-----------------
@@ -98,6 +103,9 @@ private:
     //debug function to print the values in the registers
     void printRegisters();
     
+    //Helper functions for big three
+    void copyHelper(const Machine& other);
+    void deleteHelper();
     
     
     //Member variables----------------
@@ -109,7 +117,8 @@ private:
     operation operations[NUM_INSTRUCTIONS];
     
     //Collection of arrays. [0] is the zero array, the current program?
-    uint32_t* platterArrays[128]; //TODO CHANGE SIZE OF ARRAY
+    static const uint32_t ARRAY_SIZE = 128;
+    uint32_t* platterArrays[ARRAY_SIZE];
     
     //program counter
     int pc = 0; //TODO use uint32_t?
