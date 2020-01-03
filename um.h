@@ -114,7 +114,14 @@ private:
     uint32_t registers[NUM_REGISTERS];
     
     //array of operations (only has 0-6 for now)
-    operation operations[NUM_INSTRUCTIONS];
+    //ORTH is implemented separately since it uses different bits and has a different signature
+    operation operations[7] = { &Machine::CMOV, 
+                                &Machine::INDEX, 
+                                &Machine::AMEND,
+                                &Machine::ADD, 
+                                &Machine::MUL, 
+                                &Machine::DIV,
+                                &Machine::NAND };
     
     //Collection of arrays. [0] is the zero array, the current program?
     static const uint32_t ARRAY_SIZE = 128;

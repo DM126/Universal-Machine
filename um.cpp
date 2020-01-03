@@ -11,19 +11,9 @@ Machine::Machine()
         registers[i] = 0;
     }
     
-    operations[0] = &Machine::CMOV;
-    operations[1] = &Machine::INDEX;
-    operations[2] = &Machine::AMEND;
-    operations[3] = &Machine::ADD;
-    operations[4] = &Machine::MUL;
-    operations[5] = &Machine::DIV;
-    operations[6] = &Machine::NAND;
-    //ORTH is implemented separately since it uses different bits and has a different signature
-    
     //TODO Should program start with ALLOC or just do this?
     platterArrays[0] = new uint32_t[ARRAY_SIZE]; //TODO TEMPORARY, ALSO CHANGE ARRAY SIZE
     nextAddress = 1; //0 is reserved, so 1 is next?
-    
     
     run();
 }
@@ -55,14 +45,6 @@ void Machine::copyHelper(const Machine& other)
     {
         registers[i] = other.registers[i];
     }
-    
-    operations[0] = &Machine::CMOV;
-    operations[1] = &Machine::INDEX;
-    operations[2] = &Machine::AMEND;
-    operations[3] = &Machine::ADD;
-    operations[4] = &Machine::MUL;
-    operations[5] = &Machine::DIV;
-    operations[6] = &Machine::NAND;
     
     for (int i = 0; i < ARRAY_SIZE; i++)
     {
